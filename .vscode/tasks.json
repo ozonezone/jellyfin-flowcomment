@@ -1,0 +1,76 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-and-copy",
+      "dependsOrder": "sequence",
+      "dependsOn": ["build", "make-plugin-dir", "copy-dll"]
+    },
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "shell",
+      "args": [
+        "publish",
+        "${workspaceFolder}/Jellyfin.Plugin.FlowComment.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    {
+      "label": "make-plugin-dir",
+      "type": "shell",
+      "command": "mkdir",
+      "args": [
+        "-p",
+        "${workspaceFolder}/jellyfin/data/config/plugins/Jellyfin.Plugin.FlowComment/"
+      ]
+    },
+    {
+      "label": "copy-dll",
+      "type": "shell",
+      "command": "cp",
+      "args": [
+        "./Jellyfin.Plugin.FlowComment/bin/Debug/net6.0/publish/Jellyfin.Plugin.FlowComment.dll",
+        "${workspaceFolder}/jellyfin/data/config/plugins/Jellyfin.Plugin.FlowComment/"
+      ]
+    },
+    {
+      "label": "Build and Launch",
+      "type": "shell",
+      "dependsOn": [
+        "build-and-copy"
+      ],
+      "command": "zsh",
+      "args": [
+        "-c",
+        "export UID=$UID && export GID=$GID && cd ./jellyfin && docker-compose up -d"
+      ]
+    },
+    {
+      "label": "Build and Restart",
+      "type": "shell",
+      "dependsOn": [
+        "build-and-copy"
+      ],
+      "command": "zsh",
+      "args": [
+        "-c",
+        "export UID=$UID && export GID=$GID && cd ./jellyfin && docker-compose restart"
+      ]
+    },
+    {
+      "label": "Launch",
+      "type": "shell",
+      "command": "zsh",
+      "args": [
+        "-c",
+        "export UID=$UID && export GID=$GID && cd ./jellyfin && docker-compose up -d"
+      ]
+    }
+  ]
+}

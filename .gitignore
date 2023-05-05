@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+.idea/
+artifacts
+Jellyfin.Plugin.FlowComment/Api/flowcomment.js
+jellyfin/data/
+release.zip

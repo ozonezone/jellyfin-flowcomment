@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "coreclr",
+      "name": "Launch",
+      "request": "launch",
+      "preLaunchTask": "build-and-copy",
+      "program": "${workspaceFolder}/../jellyfin/Jellyfin.Server/bin/Debug/net7.0/jellyfin.dll",
+      "args": [
+        "--webdir",
+        "${workspaceFolder}/../jellyfin-web/dist/"
+      ],
+      "cwd": "${workspaceFolder}/../jellyfin/Jellyfin.Server"
+    }
+  ]
+}

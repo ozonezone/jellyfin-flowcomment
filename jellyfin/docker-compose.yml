@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    volumes:
+      - ./data/config:/config
+      - ./data/cache:/cache
+      - ./data/Videos:/video
+    restart: 'unless-stopped'
+    ports:
+      - 8096:8096
