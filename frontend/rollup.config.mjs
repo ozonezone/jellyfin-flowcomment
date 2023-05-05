@@ -6,7 +6,7 @@ export default {
   input: "src/index.ts",
   output: {
     file: "../Jellyfin.Plugin.FlowComment/Api/flowcomment.js",
-    format: "cjs",
+    format: "iife",
   },
   plugins: [
     nodeResolve(),

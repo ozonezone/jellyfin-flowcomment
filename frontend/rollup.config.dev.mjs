@@ -7,7 +7,7 @@ export default [{
   input: "src/index.ts",
   output: {
     file: "./dist/bundle.js",
-    format: "cjs",
+    format: "iife",
   },
   plugins: [
     nodeResolve(),
@@ -37,7 +37,7 @@ export default [{
   input: "./load-serve.ts",
   output: {
     file: "../Jellyfin.Plugin.FlowComment/Api/flowcomment.js",
-    format: "cjs",
+    format: "iife",
   },
   plugins: [
     nodeResolve(),
