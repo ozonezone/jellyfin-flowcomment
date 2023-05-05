@@ -11,7 +11,7 @@
         "version": "0.1.0.0",
         "changelog": "Initial release",
         "targetAbi": "10.8.0.0",
-        "checksum": "bafa46789343d1a7ca7ade77563cfed5",
+        "checksum": "c2624fca6304bebc1d98acb9857441f4",
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.0.0/release.zip"
       }
     ]
