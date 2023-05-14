@@ -1,12 +1,19 @@
-import { debug, info } from "./utils";
-import { loadUi, unloadUi } from "./uiInit";
-
-let mediaSourceId: null | string = null;
-let embyAuthValue: null | string = null;
+import { info } from "./utils";
+import { VideoUi } from "./videoUi/index.jsx";
+import { error } from "./utils.js";
+import { initMediaSourceIdWatcher } from "./mediaSourceIdState";
 
 (async () => {
   info("loaded");
+
+  initMediaSourceIdWatcher();
+  videoUiController();
+})();
+
+function videoUiController() {
   let previousRoutePath = "";
+  let videoUi: null | VideoUi = null;
+
   document.addEventListener("viewshow", function () {
     let currentRoutePath = Emby.Page.currentRouteInfo.path;
 
@@ -15,42 +22,33 @@ let embyAuthValue: null | string = null;
     if (currentRoutePath !== previousRoutePath) {
       previousRoutePath = currentRoutePath;
       if (currentRoutePath?.startsWith("/video")) {
-        if (embyAuthValue && mediaSourceId) {
-          loadUi(embyAuthValue!, mediaSourceId!);
+        let videoControlElem: null | HTMLElement = null;
+        document.querySelectorAll<HTMLElement>(".osdTimeText").forEach(
+          (element) => {
+            if (element.offsetParent != null) {
+              videoControlElem = element.parentElement;
+            }
+          },
+        );
+        if (videoControlElem == null) {
+          error("Failed to find control parent");
+          return;
         }
-        mediaSourceId = null;
-        embyAuthValue = null;
+
+        const videoContainer: HTMLElement | null = document.querySelector(
+          ".videoPlayerContainer",
+        );
+        if (videoContainer == null) {
+          error("Failed to find video container");
+          return;
+        }
+
+        videoUi = new VideoUi(videoControlElem as HTMLElement, videoContainer);
       } else {
-        unloadUi();
+        if (videoUi) {
+          videoUi.destroy();
+        }
       }
     }
   });
-})();
-
-const { fetch: originalFetch } = window;
-
-window.fetch = async (...args) => {
-  let [resource, config] = args;
-
-  // @ts-ignore
-  let url = new URL(resource);
-  let urlParts = url.pathname.split("/");
-  let isPlaybackInfo = urlParts.pop() == "PlaybackInfo";
-
-  const response = await originalFetch(resource, config);
-
-  if (isPlaybackInfo) {
-    mediaSourceId = new URLSearchParams(url.search).get("MediaSourceId");
-    // @ts-ignore
-    mediaSourceId = mediaSourceId ? mediaSourceId : urlParts.pop();
-
-    debug(`Found media source ID: ${mediaSourceId}`);
-
-    // @ts-ignore
-    let auth = config.headers["X-Emby-Authorization"];
-    embyAuthValue = auth ? auth : "";
-    debug(`Using Emby auth value: ${embyAuthValue}`);
-  }
-
-  return response;
-};
+}

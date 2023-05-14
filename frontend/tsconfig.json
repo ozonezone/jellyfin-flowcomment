@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "typeRoots": ["types", "node_modules/@types"],
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
+}

@@ -92,6 +92,29 @@ public class FlowCommentController : ControllerBase
         return Ok();
     }
 
+    [HttpGet("GetNicoVideoId")]
+    [Authorize(Policy = "DefaultAuthorization")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult> GetNicoVideoId([FromQuery, Required] Guid itemId)
+    {
+        var item = _libraryManager.GetItemById(itemId);
+        if (item == null)
+        {
+            return BadRequest("Invalid item id.");
+        }
+        var manifest = await ManifestManager.GetManifest(item);
+
+        if (manifest.VideoId == null)
+        {
+            return NotFound("Specified itemId is not linked to any videoId.");
+        }
+
+        var videoId = manifest.VideoId;
+
+        return Ok(videoId);
+    }
+
     /// <summary>
     /// Get comments from item id.
     /// </summary>
@@ -190,8 +213,11 @@ public class FlowCommentController : ControllerBase
                 return StatusCode(500, errorJson);
             }
 
+            var returnData = new JsonObject();
+            returnData["data"] = JsonNode.Parse(commentData["data"]!["threads"]!.ToJsonString());
+            returnData["videoId"] = videoId;
 
-            return Ok(commentData["data"]!["threads"]);
+            return Ok(returnData);
         }
     }
 }

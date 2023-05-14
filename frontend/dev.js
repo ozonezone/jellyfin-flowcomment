@@ -1,7 +1,7 @@
 console.log("Loading script...");
 
 const script = document.createElement("script");
-script.src = "http://localhost:10001/bundle.js";
+script.src = "http://localhost:5173/dist/flowcomment-dev.iife.js";
 script.type = "module";
 document.head.appendChild(script);
 

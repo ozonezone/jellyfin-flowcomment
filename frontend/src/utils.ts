@@ -14,7 +14,9 @@ export function observerUrl(callback: (url: string) => any) {
   callback(location.href);
 }
 
-export async function fetchComments(itemId: string): Promise<v1Thread[]> {
+export async function fetchComments(
+  itemId: string,
+): Promise<{ data: v1Thread[]; videoId: string }> {
   const res = await ApiClient.getJSON(
     await ApiClient.getUrl("FlowComment/FetchComments/" + itemId, true),
   );
