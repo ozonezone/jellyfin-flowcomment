@@ -32,7 +32,7 @@ class CommentCanvas {
   container: HTMLElement;
   canvas: null | HTMLCanvasElement = null;
   niconicomments: null | NiconiComments = null;
-  drawInterval: null | number = null;
+  animationFrame: null | number = null;
 
   constructor(container: HTMLElement) {
     this.container = container;
@@ -64,12 +64,12 @@ class CommentCanvas {
     if (this.canvas) {
       this.canvas.remove();
     }
-    if (this.drawInterval) clearInterval(this.drawInterval);
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
   }
 
   async fetchAndDrawComments(mediaSourceId: string): Promise<string> {
     if (this.canvas == null) this.canvas = this.createCanvas();
-    if (this.drawInterval) clearInterval(this.drawInterval);
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
     if (this.niconicomments) this.niconicomments.clear();
 
     const comments = await fetchComments(mediaSourceId);
@@ -77,21 +77,25 @@ class CommentCanvas {
     this.niconicomments = new NiconiComments(this.canvas, comments.data, {
       format: "v1",
     });
-    const videoElem = document.querySelector("video");
-    this.drawInterval = setInterval(
-      () => {
-        this.niconicomments!.drawCanvas(
-          Math.floor(videoElem!.currentTime * 100),
-        );
-      },
-      10,
-    );
+
+    this.startComment();
 
     return comments.videoId;
   }
 
+  startComment() {
+    const videoElem = document.querySelector("video");
+    const frame = () => {
+      this.niconicomments!.drawCanvas(
+        Math.floor(videoElem!.currentTime * 100),
+      );
+      this.animationFrame = requestAnimationFrame(frame);
+    };
+    this.animationFrame = requestAnimationFrame(frame);
+  }
+
   disable() {
-    if (this.drawInterval) clearInterval(this.drawInterval);
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
     if (this.niconicomments) this.niconicomments.clear();
   }
 
@@ -100,14 +104,6 @@ class CommentCanvas {
       info("No niconicomments instance");
       return;
     }
-    const videoElem = document.querySelector("video");
-    this.drawInterval = setInterval(
-      () => {
-        this.niconicomments!.drawCanvas(
-          Math.floor(videoElem!.currentTime * 100),
-        );
-      },
-      10,
-    );
+    this.startComment();
   }
 }
