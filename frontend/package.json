@@ -26,7 +26,7 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
-    "@xpadev-net/niconicomments": "^0.2.48",
+    "@xpadev-net/niconicomments": "^0.2.55",
     "solid-js": "^1.7.5"
   }
 }

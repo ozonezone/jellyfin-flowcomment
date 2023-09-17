@@ -34,6 +34,9 @@ class CommentCanvas {
   niconicomments: null | NiconiComments = null;
   animationFrame: null | number = null;
 
+  previousTime = 0;
+  indexNow = 0;
+
   constructor(container: HTMLElement) {
     this.container = container;
   }
@@ -85,10 +88,24 @@ class CommentCanvas {
 
   startComment() {
     const videoElem = document.querySelector("video");
+
+    this.previousTime = videoElem!.currentTime;
+    this.indexNow = performance.now();
+
     const frame = () => {
-      this.niconicomments!.drawCanvas(
-        Math.floor(videoElem!.currentTime * 100),
-      );
+      if (!videoElem!.paused) {
+        let delta = 0;
+        if (videoElem!.currentTime == this.previousTime) {
+          delta = performance.now() - this.indexNow;
+        } else {
+          this.previousTime = videoElem!.currentTime;
+          this.indexNow = performance.now();
+        }
+
+        this.niconicomments!.drawCanvas(
+          Math.round(videoElem!.currentTime * 100 + delta / 10),
+        );
+      }
       this.animationFrame = requestAnimationFrame(frame);
     };
     this.animationFrame = requestAnimationFrame(frame);

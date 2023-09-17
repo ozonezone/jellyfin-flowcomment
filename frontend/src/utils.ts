@@ -1,4 +1,4 @@
-import { v1Thread } from "@xpadev-net/niconicomments";
+import { V1Thread } from "@xpadev-net/niconicomments";
 
 let previous = "";
 export function observerUrl(callback: (url: string) => any) {
@@ -16,7 +16,7 @@ export function observerUrl(callback: (url: string) => any) {
 
 export async function fetchComments(
   itemId: string,
-): Promise<{ data: v1Thread[]; videoId: string }> {
+): Promise<{ data: V1Thread[]; videoId: string }> {
   const res = await ApiClient.getJSON(
     await ApiClient.getUrl("FlowComment/FetchComments/" + itemId, true),
   );
@@ -26,7 +26,7 @@ export async function fetchComments(
 export async function setVideoId(
   itemId: string,
   videoId: string,
-): Promise<v1Thread[]> {
+): Promise<V1Thread[]> {
   const res = await ApiClient.fetch({
     url: await ApiClient.getUrl(
       `FlowComment/SetNicoVideoId?itemId=${itemId}&videoId=${videoId}`,

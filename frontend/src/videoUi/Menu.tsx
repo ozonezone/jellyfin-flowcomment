@@ -1,4 +1,3 @@
-import { Show } from "solid-js";
 import { JSX } from "solid-js/jsx-runtime";
 
 export function MenuContainer({ children }: { children: JSX.Element }) {

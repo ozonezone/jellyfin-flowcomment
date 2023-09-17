@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { MenuContainer, MenuItem, MenuItemButton } from "./Menu";
 import { commentEnabledState } from "./Main";
 import { mediaSourceIdState } from "../mediaSourceIdState";

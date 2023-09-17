@@ -1,9 +1,13 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@xpadev-net/niconicomments':
-    specifier: ^0.2.48
-    version: 0.2.48
+    specifier: ^0.2.55
+    version: 0.2.55
   solid-js:
     specifier: ^1.7.5
     version: 1.7.5
@@ -1762,8 +1766,8 @@ packages:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
-  /@xpadev-net/niconicomments@0.2.48:
-    resolution: {integrity: sha512-zlo4BFveIiv1Tr4u0380cqmeObiOCoJeqzMv0aEWpdbUF9wLVNr4XLJt6+BZcJHn9nlKmU2UnxZQLITr1yPWfQ==}
+  /@xpadev-net/niconicomments@0.2.55:
+    resolution: {integrity: sha512-yeIrVTvZGmFILw0feZ/sJC2MpGDQfi6lN/P/mX6zE6Hr7zZCyV/inkrZ/x74oPY/ytpNRUkEwDLcGFl08lCq5w==}
     dev: false
 
   /acorn@8.8.2:
@@ -2318,8 +2322,8 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -2919,7 +2923,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /safe-regex-test@1.0.0:
@@ -3213,7 +3217,7 @@ packages:
       postcss: 8.4.23
       rollup: 3.21.4
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vitefu@0.2.4(vite@4.3.5):
