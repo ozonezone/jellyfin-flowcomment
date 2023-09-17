@@ -4,7 +4,7 @@ export function MenuContainer({ children }: { children: JSX.Element }) {
   return (
     <div
       class="focuscontainer dialog"
-      style="animation: 140ms ease-out 0s 1 normal both running scaleup;"
+      style="animation: 140ms ease-out 0s 1 normal both running scaleup; position: relative;"
     >
       <div class="actionSheetContent">
         <div class="actionSheetScroller scrollY" style="">

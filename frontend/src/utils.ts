@@ -37,6 +37,18 @@ export async function setVideoId(
   return res;
 }
 
+export async function getVideoId(
+  itemId: string,
+): Promise<string> {
+  const res = await ApiClient.getJSON(
+    await ApiClient.getUrl(
+      `FlowComment/GetNicoVideoId?itemId=${itemId}`,
+      true,
+    ),
+  );
+  return res;
+}
+
 export function debug(msg: any) {
   console.debug("[flowcomment] ", msg);
 }
