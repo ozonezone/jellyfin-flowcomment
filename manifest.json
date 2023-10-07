@@ -20,6 +20,13 @@
         "targetAbi": "10.8.0.0",
         "checksum": "a7c04b5520bf96d88cfc432906d8b921",
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.1.0/release.zip"
+      },
+      {
+        "version": "0.1.2.1",
+        "changelog": "Improved comment performance on firefox",
+        "targetAbi": "10.8.0.0",
+        "checksum": "2f0480317ad0c2c187ed07e74a900130",
+        "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.2.1/release.zip"
       }
     ]
   }
