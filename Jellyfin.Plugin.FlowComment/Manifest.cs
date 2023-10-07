@@ -2,13 +2,13 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MediaBrowser.Controller.Entities;
-using Microsoft.Extensions.Logging;
 
 namespace Jellyfin.Plugin.FlowComment
 {
     public class ManifestData
     {
         public string? VideoId { get; set; }
+        public string? CommentData { get; set; }
     }
 
     public class ManifestManager
@@ -46,11 +46,33 @@ namespace Jellyfin.Plugin.FlowComment
         /// </summary>
         static async public Task SetVideoId(BaseItem item, string videoId)
         {
-            var path = GetPath(item);
+            var manifest = await GetManifest(item);
+            if (manifest == null)
+            {
+                manifest = new ManifestData();
+            }
+            manifest.VideoId = videoId;
 
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
-            var data = new ManifestData() { VideoId = videoId };
-            await File.WriteAllTextAsync(path, JsonSerializer.Serialize(data));
+            var path = GetPath(item);
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            await File.WriteAllTextAsync(path, JsonSerializer.Serialize(manifest));
+        }
+
+        /// <summary>
+        /// Receive comment data and save
+        /// </summary>
+        static async public Task SetCommentData(BaseItem item, string commentData)
+        {
+            var manifest = await GetManifest(item);
+            if (manifest == null)
+            {
+                manifest = new ManifestData();
+            }
+            manifest.CommentData = commentData;
+
+            var path = GetPath(item);
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            await File.WriteAllTextAsync(path, JsonSerializer.Serialize(manifest));
         }
     }
 
