@@ -100,7 +100,7 @@ export function MenuButton({ disabled }: { disabled: boolean }) {
                   "justify-content": "space-between",
                 }}
               >
-                <label>Enabled</label>
+                <label>Offset</label>
                 <input
                   type="number"
                   value={offset()}
