@@ -23,10 +23,17 @@
       },
       {
         "version": "0.1.2.1",
-        "changelog": "Improved comment performance on firefox",
+        "changelog": "Cache comment",
         "targetAbi": "10.8.0.0",
         "checksum": "2f0480317ad0c2c187ed07e74a900130",
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.2.1/release.zip"
+      },
+      {
+        "version": "0.1.3.0",
+        "changelog": "Add ability to set comment offset",
+        "targetAbi": "10.8.0.0",
+        "checksum": "c90e125d4ea3e53a02d4b418eea85e2b",
+        "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.3.0/release.zip"
       }
     ]
   }
