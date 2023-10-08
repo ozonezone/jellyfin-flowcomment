@@ -29,10 +29,10 @@
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.2.1/release.zip"
       },
       {
-        "version": "0.1.3.0",
+        "version": "0.1.3.1",
         "changelog": "Add ability to set comment offset",
         "targetAbi": "10.8.0.0",
-        "checksum": "c90e125d4ea3e53a02d4b418eea85e2b",
+        "checksum": "112281dee0ac94ffbffc6e55114cbcdc",
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.3.0/release.zip"
       }
     ]
