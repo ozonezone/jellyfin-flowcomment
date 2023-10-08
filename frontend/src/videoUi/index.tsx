@@ -33,6 +33,7 @@ class CommentCanvas {
   canvas: null | HTMLCanvasElement = null;
   niconicomments: null | NiconiComments = null;
   animationFrame: null | number = null;
+  offset = 0;
 
   previousTime = 0;
   indexNow = 0;
@@ -103,7 +104,9 @@ class CommentCanvas {
         }
 
         this.niconicomments!.drawCanvas(
-          Math.round(videoElem!.currentTime * 100 + delta / 10),
+          Math.round(
+            videoElem!.currentTime * 100 + delta / 10 + this.offset * 100,
+          ),
         );
       }
       this.animationFrame = requestAnimationFrame(frame);

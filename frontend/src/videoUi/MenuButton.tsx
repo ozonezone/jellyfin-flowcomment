@@ -1,6 +1,6 @@
 import { createEffect, createResource, createSignal, Show } from "solid-js";
 import { MenuContainer, MenuItem, MenuItemButton } from "./Menu";
-import { commentEnabledState } from "./Main";
+import { commentEnabledState, commentOffsetState } from "./Main";
 import { mediaSourceIdState } from "../mediaSourceIdState";
 import { error, getVideoId, setVideoId } from "../utils";
 import { commentCanvas } from ".";
@@ -9,6 +9,7 @@ import { Portal } from "solid-js/web";
 export function MenuButton({ disabled }: { disabled: boolean }) {
   const [open, setOpen] = createSignal(false);
   const [showComment, setShowComment] = commentEnabledState;
+  const [offset, setOffset] = commentOffsetState;
   const [mediaSourceId] = mediaSourceIdState;
 
   const [videoId] = createResource(mediaSourceId, getVideoId);
@@ -90,6 +91,25 @@ export function MenuButton({ disabled }: { disabled: boolean }) {
             >
               Set niconico videoid
             </MenuItemButton>
+            <MenuItem>
+              <div
+                style={{
+                  "display": "flex",
+                  "gap": "3",
+                  "flex-direction": "row",
+                  "justify-content": "space-between",
+                }}
+              >
+                <label>Enabled</label>
+                <input
+                  type="number"
+                  value={offset()}
+                  onChange={(e) => {
+                    setOffset(Number(e.currentTarget.value));
+                  }}
+                />
+              </div>
+            </MenuItem>
           </MenuContainer>
         </div>
       </Portal>

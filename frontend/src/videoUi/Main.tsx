@@ -6,10 +6,12 @@ import { commentCanvas } from ".";
 
 export const commentEnabledState = createSignal(true);
 export const commentAvailableState = createSignal(false);
+export const commentOffsetState = createSignal(0);
 
 export function Main() {
   const [mediaSourceId] = mediaSourceIdState;
   const [showComment] = commentEnabledState;
+  const [offset] = commentOffsetState;
   const [loading, setLoading] = createSignal(false);
 
   createEffect(async () => {
@@ -27,6 +29,10 @@ export function Main() {
     } else {
       commentCanvas.disable();
     }
+  });
+
+  createEffect(() => {
+    commentCanvas.offset = offset();
   });
 
   return (
