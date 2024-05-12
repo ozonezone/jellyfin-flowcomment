@@ -76,7 +76,7 @@ public class FlowCommentController : ControllerBase
     }
 
     [HttpGet("SetNicoVideoId")]
-    [Authorize(Policy = "DefaultAuthorization")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> SetNicoVideoId([FromQuery, Required] Guid itemId, [FromQuery, Required] string videoId)
@@ -93,7 +93,7 @@ public class FlowCommentController : ControllerBase
     }
 
     [HttpGet("GetNicoVideoId")]
-    [Authorize(Policy = "DefaultAuthorization")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetNicoVideoId([FromQuery, Required] Guid itemId)
@@ -124,7 +124,7 @@ public class FlowCommentController : ControllerBase
     /// <response code="500">Some error.</response>
     /// <returns>Associated BIF file, or a <see cref="NotFoundResult"/>.</returns>
     [HttpGet("FetchComments/{itemId}")]
-    [Authorize(Policy = "DefaultAuthorization")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> FetchComments([FromRoute, Required] Guid itemId)
@@ -132,14 +132,14 @@ public class FlowCommentController : ControllerBase
         var item = _libraryManager.GetItemById(itemId);
         if (item == null)
         {
-            _logger.LogError($"[FlowComment/FetchComments] Item not found ({itemId})");
+            _logger.LogError($"[FlowComment/FetchComments] Item not found (ItemID: {itemId})");
             return BadRequest("Invalid item id.");
         }
         var manifest = await ManifestManager.GetManifest(item).ConfigureAwait(false);
 
         if (manifest.VideoId == null)
         {
-            _logger.LogInformation($"[FlowComment/FetchComments] VideoId id not found for {itemId}");
+            _logger.LogInformation($"[FlowComment/FetchComments] VideoId id not found for item: {itemId}");
             return NotFound("Specified itemId is not linked to any videoId.");
         }
 
