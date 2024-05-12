@@ -40,7 +40,7 @@ dotnet publish -c Release ./Jellyfin.Plugin.FlowComment.sln /property:GenerateFu
 script_runner = "@shell"
 script = '''
 rm -f release.zip
-zip -r release.zip ./Jellyfin.Plugin.FlowComment/bin/Release/net6.0/publish/Jellyfin.Plugin.FlowComment.dll
+zip -r release.zip ./Jellyfin.Plugin.FlowComment/bin/Release/net8.0/publish/Jellyfin.Plugin.FlowComment.dll
 md5sum release.zip
 '''
 
@@ -51,7 +51,7 @@ run_task = { name = ["frontend-build", "plugin-build-release", "plugin-zip"] }
 script_runner = "@shell"
 script = '''
 mkdir -p ./jellyfin/data/config/plugins/Jellyfin.Plugin.FlowComment
-cp -r ./Jellyfin.Plugin.FlowComment/bin/Debug/net6.0/publish/Jellyfin.Plugin.FlowComment.* ./jellyfin/data/config/plugins/Jellyfin.Plugin.FlowComment
+cp -r ./Jellyfin.Plugin.FlowComment/bin/Debug/net8.0/publish/Jellyfin.Plugin.FlowComment.* ./jellyfin/data/config/plugins/Jellyfin.Plugin.FlowComment
 '''
 
 [tasks.start]

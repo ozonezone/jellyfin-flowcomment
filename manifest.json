@@ -41,6 +41,13 @@
         "targetAbi": "10.9.0.0",
         "checksum": "ef65405720375f9d0da3842613b6d61e",
         "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.4.0/release.zip"
+      },
+      {
+        "version": "0.1.4.1",
+        "changelog": "Fix",
+        "targetAbi": "10.9.0.0",
+        "checksum": "4b48b38803e526be556a60a153cc8506",
+        "sourceUrl": "https://github.com/ozonezone/jellyfin-flowcomment/releases/download/0.1.4.1/release.zip"
       }
     ]
   }
